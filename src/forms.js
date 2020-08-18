@@ -3,9 +3,9 @@ const formDiv = document.getElementById("next")
 
 function main(){
     formlistner()
-    fetchReqestsImage()
-    fetchReqestsWrappingPaper()
-    fetchReqestsUser()
+    // fetchReqestsImage()
+    // fetchReqestsWrappingPaper()
+    // fetchReqestsUser()
 }
 
 function formlistner(){
@@ -48,7 +48,7 @@ function formlistner(){
                 <form id="form-div">
                         <lable>wrapping paper text</lable>
                         <input type="text">
-                        <label for="images-main">Main image</label>
+                        <label for="images-main">Image</label>
                             <select name="images-main" id="images-main">
                             
                         </select>
@@ -63,7 +63,7 @@ function formlistner(){
             }else if(formData.value === "4"){
                 const formFour = (`
                 <form id="form-div">
-                        <label for="images-main">Main Image</label>
+                        <label for="images-main">Image</label>
                             <select name="images-main" id="images-main">
                             
                         </select>
@@ -170,35 +170,35 @@ function renderDropdown(){
 }
 
 
-function fetchReqestsUser(){
-    fetch("http://localhost:3000/users")
-        .then(resp=> resp.json())
-        .then(usersData=> {
-            usersData.forEach(user=> {
-                //console.log(user)
-            })
-        })
-    }
+// function fetchReqestsUser(){
+//     fetch("http://localhost:3000/users")
+//         .then(resp=> resp.json())
+//         .then(usersData=> {
+//             usersData.forEach(user=> {
+//                 //console.log(user)
+//             })
+//         })
+//     }
 
-function fetchReqestsWrappingPaper(){
-    fetch("http://localhost:3000/wrapping_papers")
-        .then(resp=> resp.json())
-        .then(wrappingPaperData=> {
-            wrappingPaperData.forEach(paper=> {
-                //console.log(paper)
-            })
-        })
-}
-function fetchReqestsImage(){
-    fetch("http://localhost:3000/images")
-            .then(resp=> resp.json())
-            .then(imageData=> {
-                imageData.forEach(image=> {
-                    image
-                    //console.log(image)
-                })
-            })
-} 
+// function fetchReqestsWrappingPaper(){
+//     fetch("http://localhost:3000/wrapping_papers")
+//         .then(resp=> resp.json())
+//         .then(wrappingPaperData=> {
+//             wrappingPaperData.forEach(paper=> {
+//                 //console.log(paper)
+//             })
+//         })
+// }
+// function fetchReqestsImage(){
+//     fetch("http://localhost:3000/images")
+//             .then(resp=> resp.json())
+//             .then(imageData=> {
+//                 imageData.forEach(image=> {
+//                     image
+//                     //console.log(image)
+//                 })
+//             })
+// } 
 
 
 main()
