@@ -19,8 +19,8 @@ function formlistner(){
                 <form id="form-div">
                         <lable>wrapping paper text</lable>
                         <input type="text">
-                        <label for="layouts">Choose a Layout</label>
-                            <select name="layouts" id="layouts">
+                        <label for="images-main">main image</label>
+                        <select name="images-main" id="images-main">
                             <option value="">Image</option>
                             <option value="">Image</option>
                             <option value="">Image</option>
