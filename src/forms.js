@@ -7,36 +7,6 @@ function main(){
     // fetchReqestsUser()
 }
 
-// function layoutOne(){
-//     const canvasContainer = document.getElementById("wrapping-paper-card")
-//         canvasContainer.innerHTML += (`
-//             <canvas id="myCanvas" width="300" height="400" style="border:1px solid #c3c3c3;">
-//             Your browser does not support the canvas element.
-//             </canvas>
-//             <br/>
-//             <button>Edit</button>
-//             `)
-                
-//             let canvas = document.getElementById("myCanvas")
-//             let ctx = canvas.getContext("2d")
-//                         ctx.fillStyle = "lightgrey"
-//                         ctx.fillRect(0,0,100,100)
-//                         ctx.fillRect(0,100,100,100)
-//                         ctx.fillRect(100,0,100,100)
-//                         ctx.fillRect(100,200,100,100)
-//                         ctx.fillRect(100,200,100,100)
-//                         ctx.fillRect(100,300,100,100)
-
-//                         let ct = canvas.getContext("2d")
-//                         ct.fillStyle = "white"
-//                         ct.fillRect(0,200,200,200)
-//                         ct.fillRect(0,600,200,200)
-//                         ct.fillRect(200,0,200,200)
-//                         ct.fillRect(200,400,200,200)
-//                         ct.fillRect(400,200,200,200)
-//                         ct.fillRect(400,600,200,200)
-// }
-
 function fetchReqestsWrappingPaper(){
     const wrappingPaperDiv = document.getElementById('wrapping-paper-card')
     fetch("http://localhost:3000/wrapping_papers")
@@ -51,7 +21,7 @@ function fetchReqestsWrappingPaper(){
                        
                         const canvasContainer = document.getElementById("wrapping-paper-card")
                         canvasContainer.innerHTML += (`
-                            <canvas id="miniCanvas" width="300" height="400" style="border:1px solid #c3c3c3;">
+                            <canvas id="${paper.id}" width="300" height="400" style="border:1px solid #c3c3c3;">
                             Your browser does not support the canvas element.
                             </canvas>
                             <br/>
@@ -59,10 +29,12 @@ function fetchReqestsWrappingPaper(){
                             <br/>
                             <br/>
                             `)
-                            let canvas = document.getElementById("miniCanvas")
+
+                            let canvas = document.getElementById(`${paper.id}`)
                             let c = canvas.getContext("2d")
-                                c.fillStyle = "lightgrey"
-                                c.fillRect(0,0,100,100)
+                                c.fillStyle = "black"
+                                c.fillRect(0,0,200,100)
+                            
                                                     // ctx.fillRect(0,100,100,100)
                                                     // ctx.fillRect(100,0,100,100)
                                                     // ctx.fillRect(100,200,100,100)
@@ -86,7 +58,7 @@ function fetchReqestsWrappingPaper(){
                          
                          const canvasContainer = document.getElementById("wrapping-paper-card")
                          canvasContainer.innerHTML += (`
-                             <canvas id="miniCanvas" width="300" height="400" style="border:1px solid #c3c3c3;">
+                             <canvas id="${paper.id}" width="300" height="400" style="border:1px solid #c3c3c3;">
                              Your browser does not support the canvas element.
                              </canvas>
                              <br/>
@@ -104,7 +76,7 @@ function fetchReqestsWrappingPaper(){
                          
                          const canvasContainer = document.getElementById("wrapping-paper-card")
                          canvasContainer.innerHTML += (`
-                             <canvas id="miniCanvas" width="300" height="400" style="border:1px solid #c3c3c3;">
+                             <canvas id="${paper.id}" width="300" height="400" style="border:1px solid #c3c3c3;">
                              Your browser does not support the canvas element.
                              </canvas>
                              <br/>
@@ -121,7 +93,7 @@ function fetchReqestsWrappingPaper(){
                             wrappingPaperDiv.innerHTML += (`<p>${paper.name}</p><p>${paper.layout}</p><p>${paper.user.username}</p>`)
                             const canvasContainer = document.getElementById("wrapping-paper-card")
                             canvasContainer.innerHTML += (`
-                            <canvas id="myCanvas" width="300" height="400" style="border:1px solid #c3c3c3;">
+                            <canvas id="${paper.id}" width="300" height="400" style="border:1px solid #c3c3c3;">
                             Your browser does not support the canvas element.
                             </canvas>
                             <br/>
@@ -158,7 +130,7 @@ function canvasLayouts(layoutValue){
                     ctx.fillRect(200,200,200,200)
                     ctx.fillRect(200,600,200,200)
 
-                    var ct = canvas.getContext("2d")
+                    let ct = canvas.getContext("2d")
                     ct.fillStyle = "white"
                     ct.fillRect(0,200,200,200)
                     ct.fillRect(0,600,200,200)
@@ -167,7 +139,6 @@ function canvasLayouts(layoutValue){
                     ct.fillRect(400,200,200,200)
                     ct.fillRect(400,600,200,200)
 
-                console.log('1')
     }else if (layoutValue === "2"){
 
         const canvasContainer = document.getElementById("canvas")
