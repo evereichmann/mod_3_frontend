@@ -16,9 +16,9 @@ function canvasLayouts(layoutValue){
                         Your browser does not support the canvas element.
                     </canvas>
                     <br/>
-                    <button>Print</button>
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <button id="btn-all">Print</button>
+                    <button id="btn-all">Edit</button>
+                    <button id="btn-all">Delete</button>
                 `)
                 let canvas = document.getElementById("myCanvas")
                     let ctx = canvas.getContext("2d")
