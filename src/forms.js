@@ -3,8 +3,136 @@ const formDiv = document.getElementById("next")
 function main(){
     formlistner()
     // fetchReqestsImage()
-    // fetchReqestsWrappingPaper()
+    fetchReqestsWrappingPaper()
     // fetchReqestsUser()
+}
+
+// function layoutOne(){
+//     const canvasContainer = document.getElementById("wrapping-paper-card")
+//         canvasContainer.innerHTML += (`
+//             <canvas id="myCanvas" width="300" height="400" style="border:1px solid #c3c3c3;">
+//             Your browser does not support the canvas element.
+//             </canvas>
+//             <br/>
+//             <button>Edit</button>
+//             `)
+                
+//             let canvas = document.getElementById("myCanvas")
+//             let ctx = canvas.getContext("2d")
+//                         ctx.fillStyle = "lightgrey"
+//                         ctx.fillRect(0,0,100,100)
+//                         ctx.fillRect(0,100,100,100)
+//                         ctx.fillRect(100,0,100,100)
+//                         ctx.fillRect(100,200,100,100)
+//                         ctx.fillRect(100,200,100,100)
+//                         ctx.fillRect(100,300,100,100)
+
+//                         let ct = canvas.getContext("2d")
+//                         ct.fillStyle = "white"
+//                         ct.fillRect(0,200,200,200)
+//                         ct.fillRect(0,600,200,200)
+//                         ct.fillRect(200,0,200,200)
+//                         ct.fillRect(200,400,200,200)
+//                         ct.fillRect(400,200,200,200)
+//                         ct.fillRect(400,600,200,200)
+// }
+
+function fetchReqestsWrappingPaper(){
+    const wrappingPaperDiv = document.getElementById('wrapping-paper-card')
+    fetch("http://localhost:3000/wrapping_papers")
+        .then(resp=> resp.json())
+        .then(wrappingPaperData=> {
+            wrappingPaperData.forEach(paper=> {
+                if(paper.layout === 1){
+                    paper.images.forEach(image=>{
+                        wrappingPaperDiv.innerHTML += (`<img src="${image.img_url}" height="200px" weidth="200px"/>`)
+                        })
+                        wrappingPaperDiv.innerHTML += (`<p>${paper.name}</p><p>${paper.layout}</p><p>${paper.user.username}</p><p>${paper.inner_text.inner_text}</p>`)
+                       
+                        const canvasContainer = document.getElementById("wrapping-paper-card")
+                        canvasContainer.innerHTML += (`
+                            <canvas id="miniCanvas" width="300" height="400" style="border:1px solid #c3c3c3;">
+                            Your browser does not support the canvas element.
+                            </canvas>
+                            <br/>
+                            <button>Edit</button>
+                            <br/>
+                            <br/>
+                            `)
+                            let canvas = document.getElementById("miniCanvas")
+                            let c = canvas.getContext("2d")
+                                c.fillStyle = "lightgrey"
+                                c.fillRect(0,0,100,100)
+                                                    // ctx.fillRect(0,100,100,100)
+                                                    // ctx.fillRect(100,0,100,100)
+                                                    // ctx.fillRect(100,200,100,100)
+                                                    // ctx.fillRect(100,200,100,100)
+                                                    // ctx.fillRect(100,300,100,100)
+                            
+                                                    // let ct = canvas.getContext("2d")
+                                                    // ct.fillStyle = "white"
+                                                    // ct.fillRect(0,200,200,200)
+                                                    // ct.fillRect(0,600,200,200)
+                                                    // ct.fillRect(200,0,200,200)
+                                                    // ct.fillRect(200,400,200,200)
+                                                    // ct.fillRect(400,200,200,200)
+                                                    // ct.fillRect(400,600,200,200)
+                }else if(paper.layout === 2){
+                    
+                    paper.images.forEach(image=>{
+                             wrappingPaperDiv.innerHTML += (`<img src="${image.img_url}" height="200px" weidth="200px"/>`)
+                         })
+                         wrappingPaperDiv.innerHTML += (`<p>${paper.name}</p><p>${paper.layout}</p><p>${paper.user.username}</p>`)
+                         
+                         const canvasContainer = document.getElementById("wrapping-paper-card")
+                         canvasContainer.innerHTML += (`
+                             <canvas id="miniCanvas" width="300" height="400" style="border:1px solid #c3c3c3;">
+                             Your browser does not support the canvas element.
+                             </canvas>
+                             <br/>
+                            <button>Edit</button>
+                            <br/>
+                            <br/>
+                             `)
+
+                }else if(paper.layout === 3){
+                    
+                    paper.images.forEach(image=>{
+                             wrappingPaperDiv.innerHTML += (`<img src="${image.img_url}" height="200px" weidth="200px"/>`)
+                         })
+                         wrappingPaperDiv.innerHTML += (`<p>${paper.name}</p><p>${paper.layout}</p><p>${paper.user.username}</p><p>${paper.inner_text.inner_text}</p>`)                
+                         
+                         const canvasContainer = document.getElementById("wrapping-paper-card")
+                         canvasContainer.innerHTML += (`
+                             <canvas id="miniCanvas" width="300" height="400" style="border:1px solid #c3c3c3;">
+                             Your browser does not support the canvas element.
+                             </canvas>
+                             <br/>
+                            <button>Edit</button>
+                            <br/>
+                            <br/>
+                             `)
+                    
+                        }else{
+                    
+                            paper.images.forEach(image=>{
+                             wrappingPaperDiv.innerHTML += (`<img src="${image.img_url}" height="200px" weidth="200px"/>`)
+                            })
+                            wrappingPaperDiv.innerHTML += (`<p>${paper.name}</p><p>${paper.layout}</p><p>${paper.user.username}</p>`)
+                            const canvasContainer = document.getElementById("wrapping-paper-card")
+                            canvasContainer.innerHTML += (`
+                            <canvas id="myCanvas" width="300" height="400" style="border:1px solid #c3c3c3;">
+                            Your browser does not support the canvas element.
+                            </canvas>
+                            <br/>
+                            <button>Edit</button>
+                            <br/>
+                            <br/>
+                            `)
+                
+                        }
+            })
+        })
 }
 
 function canvasLayouts(layoutValue){
@@ -29,6 +157,16 @@ function canvasLayouts(layoutValue){
                     ctx.fillRect(400,400,200,200)
                     ctx.fillRect(200,200,200,200)
                     ctx.fillRect(200,600,200,200)
+
+                    var ct = canvas.getContext("2d")
+                    ct.fillStyle = "white"
+                    ct.fillRect(0,200,200,200)
+                    ct.fillRect(0,600,200,200)
+                    ct.fillRect(200,0,200,200)
+                    ct.fillRect(200,400,200,200)
+                    ct.fillRect(400,200,200,200)
+                    ct.fillRect(400,600,200,200)
+
                 console.log('1')
     }else if (layoutValue === "2"){
 
@@ -51,6 +189,15 @@ function canvasLayouts(layoutValue){
                     ctx.fillRect(400,400,200,200)
                     ctx.fillRect(200,200,200,200)
                     ctx.fillRect(200,600,200,200)
+
+                    var ct = canvas.getContext("2d")
+                    ct.fillStyle = "white"
+                    ct.fillRect(0,200,200,200)
+                    ct.fillRect(0,600,200,200)
+                    ct.fillRect(200,0,200,200)
+                    ct.fillRect(200,400,200,200)
+                    ct.fillRect(400,200,200,200)
+                    ct.fillRect(400,600,200,200)
                 console.log('2')
     }else if (layoutValue === "3"){
 
@@ -132,6 +279,12 @@ function formlistner(){
             const formData = document.getElementById("layouts")
             let layoutValue = formData.value
             if(formData.value === "1"){
+
+                let div = document.getElementById("index-container")
+                while(div.firstChild){
+                div.removeChild(div.firstChild)
+                }
+
                 const formOne = (`
                 <form id="form-div">
                         <lable>wrapping paper text</lable>
@@ -145,6 +298,12 @@ function formlistner(){
                 renderDropdown()
                 canvasLayouts(layoutValue)
             }else if(formData.value === "2"){
+
+                let div = document.getElementById("index-container")
+                while(div.firstChild){
+                div.removeChild(div.firstChild)
+                }
+
                 const formTwo =(`
                     <form id="form-div">
                     <label for="images-main">Image</label>
@@ -160,6 +319,12 @@ function formlistner(){
                 renderDropdownSecondary()
                 canvasLayouts(layoutValue)
             }else if(formData.value === "3"){
+
+                let div = document.getElementById("index-container")
+                while(div.firstChild){
+                div.removeChild(div.firstChild)
+                }
+
                 const formThree = (`
                 <form id="form-div">
                         <lable>wrapping paper text</lable>
@@ -178,6 +343,12 @@ function formlistner(){
                     renderDropdownSecondary()
                     canvasLayouts(layoutValue)
             }else if(formData.value === "4"){
+
+                let div = document.getElementById("index-container")
+                while(div.firstChild){
+                div.removeChild(div.firstChild)
+                }
+
                 const formFour = (`
                 <form id="form-div">
                         <label for="images-main">Image</label>
@@ -298,15 +469,7 @@ function renderDropdown(){
 //         })
 //     }
 
-// function fetchReqestsWrappingPaper(){
-//     fetch("http://localhost:3000/wrapping_papers")
-//         .then(resp=> resp.json())
-//         .then(wrappingPaperData=> {
-//             wrappingPaperData.forEach(paper=> {
-//                 //console.log(paper)
-//             })
-//         })
-// }
+
 // function fetchReqestsImage(){
 //     fetch("http://localhost:3000/images")
 //             .then(resp=> resp.json())
