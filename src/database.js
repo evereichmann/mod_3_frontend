@@ -1,6 +1,7 @@
 function main(){
     logIn()
     makingWrappingPaper()
+    deleteClickListner()
 }
 
 function logIn(){
@@ -20,17 +21,55 @@ function makingWrappingPaper(){
     const mainDiv = document.getElementById("main-div")
     mainDiv.addEventListener("click", function(event){
         if(event.target.className === "save"){
-            //gets name from form
-            let wrapperName = document.getElementById("wrapper-name")
-            let layoutType = document.getElementById("layouts")
-            let wrapperInnerText = document.getElementById("wrapping-inner-text")
-            let imageSelection = document.getElementById("images-main")
-            console.log(wrapperName.value)
-            console.log(layoutType.value)
-            console.log(wrapperInnerText.value)
-            console.log(imageSelection.value)
+            
+            const wrapperName = document.getElementById("wrapper-name")
+            const layoutType = document.getElementById("layouts")
+            
+            const newPaper = {
+                "name": wrapperName.value,
+                "layout": layoutType.value,
+                "user_id": 1,
+            }
+            
+            const reqObj = {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newPaper)
+            }
+
+            fetch("http://localhost:3000/wrapping_papers", reqObj)
+                .then(resp=> resp.json())
+                .then(newWrapPaper=> {
+                    console.log(newWrapPaper.name)
+                })
         }
     })
 }
+
+function deleteClickListner(){
+    const findDeleteBtn = document.getElementById('index-container')
+    findDeleteBtn.addEventListener('click', function(event){
+        if(event.target.className === "delete"){
+            const wrappingPaperDeleteId = event.target.dataset.id
+            
+            const reqObj = {
+                    method: "DELETE"
+                }
+                
+                fetch(`http://localhost:3000/wrapping_papers/${wrappingPaperDeleteId}`, reqObj)
+                    .then(resp=> resp.text())
+                    .then(data=> {
+                        event.target.previousSibling.previousSibling.previousSibling.remove()
+                        event.target.previousSibling.previousSibling.remove()
+                        event.target.remove()
+                })
+        }
+    })
+}
+
+
+
 
 main()
