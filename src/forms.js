@@ -4,9 +4,7 @@ const currentUser = {id: 1, username: "evereichmann" , password: "1234Flatiron"}
 
 function main(){
     formlistner()
-    // fetchReqestsImage()
     fetchReqestsWrappingPaper()
-    // fetchReqestsUser()
 }
 
 function fetchReqestsWrappingPaper(){
@@ -15,9 +13,7 @@ function fetchReqestsWrappingPaper(){
         .then(resp=> resp.json())
         .then(wrappingPaperData=> {
             wrappingPaperData.forEach(paper=> {
-                    console.log(paper)
-                        const editWrapingPaper =  (()=>{return paper.user_id === currentUser.id} ) ? 'view' : 'edit'
-                        wrappingPaperDiv.innerHTML += (`<p>${paper.name}</p><button data-id=${paper.user_id}>${editWrapingPaper}</button>`)
+                        wrappingPaperDiv.innerHTML += (`<p>${paper.name}</p><button id="btn-all" data-id=${paper.id}>View</button>  <button id="btn-all" data-id=${paper.id} class="delete" >Delete</button>`)
             })
         })
 }
@@ -31,11 +27,26 @@ function canvasLayouts(layoutValue){
                         Your browser does not support the canvas element.
                     </canvas>
                     <br/>
+                    `)
+                    // <div id="buttons">
+                    // <button id="btn-all" class="print">Print</button>
+                    // <button id="btn-all" class="edit">Edit</button>
+                    // <button id="btn-all" class="save">Save</button>
+                    // <button id="btn-all" class="delete">Delete</button>
+                    // </div>
+        const buttonContainer = document.getElementById("buttons")
+            buttonContainer.innerHTML = (`
                     <button id="btn-all" class="print">Print</button>
+                    </br>
                     <button id="btn-all" class="edit">Edit</button>
+                    </br>
                     <button id="btn-all" class="save">Save</button>
+                    </br>
                     <button id="btn-all" class="delete">Delete</button>
-                `)
+                    </br>
+                    <button id="btn-all" class="home">Home</button>
+            `)            
+
                 let canvas = document.getElementById("myCanvas")
                     let ctx = canvas.getContext("2d")
                     ctx.fillStyle = "lightgrey"
@@ -160,21 +171,23 @@ function canvasLayouts(layoutValue){
 
 function wrappingPaperImage(){
     const generatePic = document.getElementById("next")
-    generatePic.addEventListener('submit', function(event){
+    generatePic.addEventListener('click', function(event){
         event.preventDefault()
-        if(event.target.tagName === "BUTTON")
-        // console.log(imageField.name)
-        const imageField = document.getElementById("images-main")
-        console.log(event.target.previousElementSibling.value)
-        console.log(event.target.previousSibling.innerHTML)
-        console.log("hello world")
-        console.log(imageField.value)
-              
-        //this works!!!!!!!!!!!!!!!!!
-        // let div = document.getElementById("canvas")
-        //         while(div.firstChild){
-        //         div.removeChild(div.firstChild)
-        //         }
+        if(event.target.className === "generate"){
+            const imageChoice = document.getElementById('images-main')
+            
+            let div = document.getElementById("canvas")
+            while(div.firstChild){
+                div.removeChild(div.firstChild)
+            } 
+            
+            console.log(imageChoice.value)
+
+            const newImage = document.createElement('img')
+            newImage.src = `${imageChoice.value}`
+            div.append(newImage)
+
+        }
     })
 }
 
@@ -203,14 +216,14 @@ function formlistner(){
                         <br/>
                         <select name="images-main" id="images-main">
                             <option value="">Select Image</option>
-                            <option value="https://ibb.co/k9NWkdq">Birthday Cake</option>
-                            <option value="https://ibb.co/qj21Ym9">Snowflakes</option>
-                            <option value="https://ibb.co/HdGmTYz">Hearts</option>
-                            <option value="https://ibb.co/9ZFm7Fp">Clovers</option>
-                            <option value="https://ibb.co/b2vwnFK">Flowers</option>
+                            <option value="https://i.ibb.co/GtzbBhC/Screen-Shot-2020-08-20-at-10-32-54-AM.png">Birthday Cake</option>
+                            <option value="https://i.ibb.co/jfj4k3G/Screen-Shot-2020-08-20-at-10-38-23-AM.png">Snowflakes</option>
+                            <option value="https://i.ibb.co/M6PqkpV/Screen-Shot-2020-08-20-at-10-42-12-AM.png">Hearts</option>
+                            <option value="https://i.ibb.co/xFpKNp2/Screen-Shot-2020-08-20-at-10-51-42-AM.png">Clovers</option>
+                            <option value="https://i.ibb.co/5njpVkR/Screen-Shot-2020-08-20-at-10-56-40-AM.png">Flowers</option>
                         </select>
                         <br/>
-                        <button id="btn-all" class="Generate">Generate</button>
+                        <button id="btn-all" class="generate">Generate</button>
                         </form>
                     `)
                 formDiv.innerHTML = formOne

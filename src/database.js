@@ -1,6 +1,7 @@
 function main(){
     logIn()
     makingWrappingPaper()
+    deleteClickListner()
 }
 
 function logIn(){
@@ -20,11 +21,9 @@ function makingWrappingPaper(){
     const mainDiv = document.getElementById("main-div")
     mainDiv.addEventListener("click", function(event){
         if(event.target.className === "save"){
-            //gets name from form
+            
             const wrapperName = document.getElementById("wrapper-name")
             const layoutType = document.getElementById("layouts")
-            
-
             
             const newPaper = {
                 "name": wrapperName.value,
@@ -43,12 +42,34 @@ function makingWrappingPaper(){
             fetch("http://localhost:3000/wrapping_papers", reqObj)
                 .then(resp=> resp.json())
                 .then(newWrapPaper=> {
-                    console.log(newWrapPaper)
+                    console.log(newWrapPaper.name)
                 })
-        
-
         }
     })
 }
+
+function deleteClickListner(){
+    const findDeleteBtn = document.getElementById('index-container')
+    findDeleteBtn.addEventListener('click', function(event){
+        if(event.target.className === "delete"){
+            const wrappingPaperDeleteId = event.target.dataset.id
+            
+            const reqObj = {
+                    method: "DELETE"
+                }
+                
+                fetch(`http://localhost:3000/wrapping_papers/${wrappingPaperDeleteId}`, reqObj)
+                    .then(resp=> resp.text())
+                    .then(data=> {
+                        event.target.previousSibling.previousSibling.previousSibling.remove()
+                        event.target.previousSibling.previousSibling.remove()
+                        event.target.remove()
+                })
+        }
+    })
+}
+
+
+
 
 main()
