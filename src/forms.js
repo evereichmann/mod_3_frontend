@@ -5,6 +5,100 @@ const currentUser = {id: 1, username: "evereichmann" , password: "1234Flatiron"}
 function main(){
     formlistner()
     fetchReqestsWrappingPaper()
+    logIn()
+    makingWrappingPaper()
+    deleteClickListner()
+}
+
+
+function logIn(){
+    const signInForm = document.getElementById("login-form")
+    signInForm.addEventListener('submit', function(event){
+        event.preventDefault()
+        const welcomeBanner = document.getElementById("description")
+        const welcomeUser = document.createElement("h3")
+        welcomeUser.innerText = `Welcome ${currentUser.username}`
+        welcomeBanner.append(welcomeUser)
+        event.target[0].value = ""
+        event.target[1].value = ""
+    })
+}
+//find form
+function makingWrappingPaper(){
+    const mainDiv = document.getElementById("main-div")
+    mainDiv.addEventListener("click", function(event){
+        if(event.target.className === "save"){
+            
+            const wrapperName = document.getElementById("wrapper-name")
+            const layoutType = document.getElementById("layouts")
+            
+            const newPaper = {
+                "name": wrapperName.value,
+                "layout": layoutType.value,
+                "user_id": 1,
+            }
+            
+            const reqObj = {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newPaper)
+            }
+
+            fetch("http://localhost:3000/wrapping_papers", reqObj)
+                .then(resp=> resp.json())
+                .then(newWrapPaper=> {
+                    // console.log(newWrapPaper.name)
+                })
+              }
+        //else if(event.target.className === "home"){
+            
+        //     let div = document.getElementById("canvas")
+        //     while(div.firstChild){
+        //         div.removeChild(div.firstChild)
+        //     }
+
+        //     const wrappingPaperDiv = document.getElementById('wrapping-paper-card')
+        //     fetch("http://localhost:3000/wrapping_papers")
+        //         .then(resp=> resp.json())
+        //         .then(wrappingPaperData=> {
+        //             wrappingPaperData.forEach(paper=> {
+        //             wrappingPaperDiv.innerHTML += (`<p>${paper.name}</p><button id="btn-all" data-id=${paper.id}>View</button>  <button id="btn-all" data-id=${paper.id} class="delete" >Delete</button>`)
+        //     })
+        // })
+        //}
+        else if(event.target.className === "delete"){
+            
+            let div = document.getElementById("canvas")
+            while(div.firstChild){
+            div.removeChild(div.firstChild)
+
+            }
+ 
+        }
+    })
+}
+
+function deleteClickListner(){
+    const findDeleteBtn = document.getElementById('index-container')
+    findDeleteBtn.addEventListener('click', function(event){
+        if(event.target.className === "delete"){
+            const wrappingPaperDeleteId = event.target.dataset.id
+            
+            const reqObj = {
+                    method: "DELETE"
+                }
+                
+                fetch(`http://localhost:3000/wrapping_papers/${wrappingPaperDeleteId}`, reqObj)
+                    .then(resp=> resp.text())
+                    .then(data=> {
+                        event.target.previousSibling.previousSibling.previousSibling.remove()
+                        event.target.previousSibling.previousSibling.remove()
+                        event.target.remove()
+                })
+        }
+    })
 }
 
 function fetchReqestsWrappingPaper(){
@@ -19,6 +113,7 @@ function fetchReqestsWrappingPaper(){
 }
 
 
+
 function canvasLayouts(layoutValue){
     if (layoutValue === "1"){
         const canvasContainer = document.getElementById("canvas")
@@ -28,12 +123,7 @@ function canvasLayouts(layoutValue){
                     </canvas>
                     <br/>
                     `)
-                    // <div id="buttons">
-                    // <button id="btn-all" class="print">Print</button>
-                    // <button id="btn-all" class="edit">Edit</button>
-                    // <button id="btn-all" class="save">Save</button>
-                    // <button id="btn-all" class="delete">Delete</button>
-                    // </div>
+
         const buttonContainer = document.getElementById("buttons")
             buttonContainer.innerHTML = (`
                     <button id="btn-all" class="print">Print</button>
@@ -96,7 +186,7 @@ function canvasLayouts(layoutValue){
                     ct.fillRect(200,400,200,200)
                     ct.fillRect(400,200,200,200)
                     ct.fillRect(400,600,200,200)
-                console.log('2')
+                //console.log('2')
     }else if (layoutValue === "3"){
 
         const canvasContainer = document.getElementById("canvas")
@@ -130,7 +220,7 @@ function canvasLayouts(layoutValue){
                 c.fillStyle = "white";
                 c.fillRect(200,0,200,200)
                 c.fillRect(200,400,200,200)
-                console.log('3')
+                // console.log('3')
     }else{
 
         const canvasContainer = document.getElementById("canvas")
@@ -164,7 +254,7 @@ function canvasLayouts(layoutValue){
                 c.fillStyle = "white";
                 c.fillRect(200,0,200,200)
                 c.fillRect(200,400,200,200)        
-        console.log('4')
+        // console.log('4')
     }
 
 }
@@ -181,12 +271,11 @@ function wrappingPaperImage(){
                 div.removeChild(div.firstChild)
             } 
             
-            console.log(imageChoice.value)
+            //console.log(imageChoice.value)
 
             const newImage = document.createElement('img')
             newImage.src = `${imageChoice.value}`
             div.append(newImage)
-
         }
     })
 }
