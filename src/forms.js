@@ -200,13 +200,9 @@ function formlistner(){
                 const formOne = (`
                 <form id="form-div">
                         <lable>wrapping paper text</lable>
-<<<<<<< HEAD
-                        <input id="textId" type="text">
-=======
                         <br/>
                         <input type="text" id="wrapping-inner-text">
                         <br/>
->>>>>>> 6373116e010e0a32d0a1c2b67a645d69192bd494
                         <label for="images-main">Image</label>
                         <br/>
                         <select name="images-main" id="images-main">
@@ -260,13 +256,9 @@ function formlistner(){
                 const formThree = (`
                 <form id="form-div">
                         <lable>wrapping paper text</lable>
-<<<<<<< HEAD
-                        <input id="textId" type="text">
-=======
                         <br/>
                         <input type="text">
                         <br/>
->>>>>>> 6373116e010e0a32d0a1c2b67a645d69192bd494
                         <label for="images-main">Image</label>
                         <br/>
                             <select name="images-main" id="images-main">
