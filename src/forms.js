@@ -164,10 +164,20 @@ function canvasLayouts(layoutValue){
                         Your browser does not support the canvas element.
                     </canvas>
                     <br/>
-                    <button>Print</button>
-                    <button>Edit</button>
-                    <button>Delete</button>
                 `)
+                const buttonContainer = document.getElementById("buttons")
+                buttonContainer.innerHTML = (`
+                        <button id="btn-all" class="print">Print</button>
+                        </br>
+                        <button id="btn-all" class="edit">Edit</button>
+                        </br>
+                        <button id="btn-all" class="save">Save</button>
+                        </br>
+                        <button id="btn-all" class="delete">Delete</button>
+                        </br>
+                        <button id="btn-all" class="home">Home</button>
+                `) 
+
                 let canvas = document.getElementById("myCanvas")
                     let ctx = canvas.getContext("2d")
                     ctx.fillStyle = "lightblue"
@@ -195,10 +205,19 @@ function canvasLayouts(layoutValue){
                         Your browser does not support the canvas element.
                     </canvas>
                     <br/>
-                    <button>Print</button>
-                    <button>Edit</button>
-                    <button>Delete</button>
                 `)
+                const buttonContainer = document.getElementById("buttons")
+                buttonContainer.innerHTML = (`
+                        <button id="btn-all" class="print">Print</button>
+                        </br>
+                        <button id="btn-all" class="edit">Edit</button>
+                        </br>
+                        <button id="btn-all" class="save">Save</button>
+                        </br>
+                        <button id="btn-all" class="delete">Delete</button>
+                        </br>
+                        <button id="btn-all" class="home">Home</button>
+                `) 
                 let canvas = document.getElementById("myCanvas");
                 let ctx = canvas.getContext("2d");
                 ctx.fillStyle = "lightgreen";
@@ -229,10 +248,19 @@ function canvasLayouts(layoutValue){
                      Your browser does not support the canvas element.
                     </canvas>
                     <br/>
-                    <button>Print</button>
-                    <button>Edit</button>
-                    <button>Delete</button>
                 `)
+                const buttonContainer = document.getElementById("buttons")
+                buttonContainer.innerHTML = (`
+                        <button id="btn-all" class="print">Print</button>
+                        </br>
+                        <button id="btn-all" class="edit">Edit</button>
+                        </br>
+                        <button id="btn-all" class="save">Save</button>
+                        </br>
+                        <button id="btn-all" class="delete">Delete</button>
+                        </br>
+                        <button id="btn-all" class="home">Home</button>
+                `) 
                 let canvas = document.getElementById("myCanvas");
                 let ctx = canvas.getContext("2d");
                 ctx.fillStyle = "grey";
