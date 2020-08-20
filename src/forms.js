@@ -1,14 +1,17 @@
 const formDiv = document.getElementById("next")
+const textInput = document.getElementById("textId")
 
 function main(){
     formlistner()
     // fetchReqestsImage()
     // fetchReqestsWrappingPaper()
     // fetchReqestsUser()
+   // displayText();
 }
 
 function canvasLayouts(layoutValue){
     if (layoutValue === "1"){
+        
 
         const canvasContainer = document.getElementById("canvas")
                 canvasContainer.innerHTML = (`
@@ -30,6 +33,8 @@ function canvasLayouts(layoutValue){
                     ctx.fillRect(200,200,200,200)
                     ctx.fillRect(200,600,200,200)
                 console.log('1')
+                
+                
     }else if (layoutValue === "2"){
 
         const canvasContainer = document.getElementById("canvas")
@@ -52,6 +57,7 @@ function canvasLayouts(layoutValue){
                     ctx.fillRect(200,200,200,200)
                     ctx.fillRect(200,600,200,200)
                 console.log('2')
+                
     }else if (layoutValue === "3"){
 
         const canvasContainer = document.getElementById("canvas")
@@ -86,6 +92,8 @@ function canvasLayouts(layoutValue){
                 c.fillRect(200,0,200,200)
                 c.fillRect(200,400,200,200)
                 console.log('3')
+                
+
     }else{
 
         const canvasContainer = document.getElementById("canvas")
@@ -135,7 +143,7 @@ function formlistner(){
                 const formOne = (`
                 <form id="form-div">
                         <lable>wrapping paper text</lable>
-                        <input type="text">
+                        <input id="textId" type="text">
                         <label for="images-main">Image</label>
                         <select name="images-main" id="images-main">
                         </select>
@@ -163,7 +171,7 @@ function formlistner(){
                 const formThree = (`
                 <form id="form-div">
                         <lable>wrapping paper text</lable>
-                        <input type="text">
+                        <input id="textId" type="text">
                         <label for="images-main">Image</label>
                             <select name="images-main" id="images-main">
                             
@@ -287,6 +295,42 @@ function renderDropdown(){
     }) 
 }
 
+//display text function
+let olderText, w;
+window.document.addEventListener('DOMContentLoaded', function(e) {
+    
+    
+        window.addEventListener('load', (ev)=>{
+        //displayText(); not working?
+       // textInput.addEventListener('input', displayText); not working
+    });
+    function displayText(){
+        canvas = document.getElementById('canvas');
+        ctx = canvas.getContext('2d'); 
+        //pulling font info from import in css file
+        let fontFamily = 'Alata';
+        ctx.font = `normal 30px xyz, ${fontFamily}`;
+        ctx.fillStyle = 'black';
+        //textAlign center, left, right, end, start
+        ctx.textAlign = 'start';
+        //textBaseline top, hanging, middle, bottom,ideographic, alphabetic
+        ctx.textBaseline = 'alphabetic';
+        //direction ltr, rtl, inherit
+        ctx.direction = 'ltr';
+        let txt = textInput.value;
+        let metrics = ctx.measureText(olderTxt);
+        let w = metrics.width;
+        //this should let us delete letters
+            ctx.clearRect(50, 110, w, -40);
+    
+            if( txt == '' ){
+             txt = 'Text here';
+        }
+        ctx.fillText(txt, 100, 100);
+        ctx.fillText(txt, 200,200);
+        oldTxt = txt;
+    }
+});
 
 // function fetchReqestsUser(){
 //     fetch("http://localhost:3000/users")
