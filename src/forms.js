@@ -32,16 +32,10 @@ function canvasLayouts(layoutValue){
                         Your browser does not support the canvas element.
                     </canvas>
                     <br/>
-<<<<<<< HEAD
-                    <button id="btn-all">Print</button>
-                    <button id="btn-all">Edit</button>
-                    <button id="btn-all">Delete</button>
-=======
                     <button id="btn-all" class="print">Print</button>
                     <button id="btn-all" class="edit">Edit</button>
                     <button id="btn-all" class="save">Save</button>
                     <button id="btn-all" class="delete">Delete</button>
->>>>>>> 6373116e010e0a32d0a1c2b67a645d69192bd494
                 `)
                 let canvas = document.getElementById("myCanvas")
                     let ctx = canvas.getContext("2d")
@@ -54,7 +48,7 @@ function canvasLayouts(layoutValue){
                     ctx.fillRect(200,600,200,200)
 
                     let ct = canvas.getContext("2d")
-                    ct.fillStyle = "white"
+                    ct.fillStyle =  "white"
                     ct.fillRect(0,200,200,200)
                     ct.fillRect(0,600,200,200)
                     ct.fillRect(200,0,200,200)
