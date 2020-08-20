@@ -33,7 +33,7 @@ function canvasLayouts(layoutValue){
                     <br/>
                     <button>Print</button>
                     <button>Edit</button>
-                    <button>Save</button>
+                    <button class="save">Save</button>
                     <button>Delete</button>
                 `)
                 let canvas = document.getElementById("myCanvas")
@@ -175,7 +175,7 @@ function formlistner(){
                 const formOne = (`
                 <form id="form-div">
                         <lable>wrapping paper text</lable>
-                        <input type="text">
+                        <input type="text" id="wrapping-inner-text">
                         <label for="images-main">Image</label>
                         <select name="images-main" id="images-main">
                         </select>
