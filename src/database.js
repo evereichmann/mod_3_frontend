@@ -21,14 +21,32 @@ function makingWrappingPaper(){
     mainDiv.addEventListener("click", function(event){
         if(event.target.className === "save"){
             //gets name from form
-            let wrapperName = document.getElementById("wrapper-name")
-            let layoutType = document.getElementById("layouts")
-            let wrapperInnerText = document.getElementById("wrapping-inner-text")
-            let imageSelection = document.getElementById("images-main")
-            console.log(wrapperName.value)
-            console.log(layoutType.value)
-            console.log(wrapperInnerText.value)
-            console.log(imageSelection.value)
+            const wrapperName = document.getElementById("wrapper-name")
+            const layoutType = document.getElementById("layouts")
+            
+
+            
+            const newPaper = {
+                "name": wrapperName.value,
+                "layout": layoutType.value,
+                "user_id": 1,
+            }
+            
+            const reqObj = {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newPaper)
+            }
+
+            fetch("http://localhost:3000/wrapping_papers", reqObj)
+                .then(resp=> resp.json())
+                .then(newWrapPaper=> {
+                    console.log(newWrapPaper)
+                })
+        
+
         }
     })
 }

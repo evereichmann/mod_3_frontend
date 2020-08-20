@@ -22,28 +22,28 @@ body {
     justify-content: space-between;
     padding: 15px;
   }
-  /*
+  
   #form {
     border-style: solid;
-    border-color: red;
+    border-color: white;
     border-width: 1px;
   }
   #index-container {
     border-style: solid;
-    border-color: grey;
+    border-color: white;
     border-width: 1px;
   }
   #next {
     border-style: solid;
-    border-color: green;
+    border-color:white;
     border-width: 1px;
   }
   #canvas {
     border-style: solid;
-    border-color:blueviolet;
+    border-color: white;
     border-width: 1px;
   }
-  */
+  
   #login-div {
     padding: 20px;
     float: right;

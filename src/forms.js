@@ -15,12 +15,12 @@ function fetchReqestsWrappingPaper(){
         .then(resp=> resp.json())
         .then(wrappingPaperData=> {
             wrappingPaperData.forEach(paper=> {
-                        const editWrapingPaper = (function(){ return paper.user_id === currentUser.id } ) ? 'view' : 'edit'
+                    console.log(paper)
+                        const editWrapingPaper =  (()=>{return paper.user_id === currentUser.id} ) ? 'view' : 'edit'
                         wrappingPaperDiv.innerHTML += (`<p>${paper.name}</p><button data-id=${paper.user_id}>${editWrapingPaper}</button>`)
             })
         })
 }
-
 
 
 function canvasLayouts(layoutValue){
@@ -31,10 +31,10 @@ function canvasLayouts(layoutValue){
                         Your browser does not support the canvas element.
                     </canvas>
                     <br/>
-                    <button>Print</button>
-                    <button>Edit</button>
-                    <button class="save">Save</button>
-                    <button>Delete</button>
+                    <button id="btn-all" class="print">Print</button>
+                    <button id="btn-all" class="edit">Edit</button>
+                    <button id="btn-all" class="save">Save</button>
+                    <button id="btn-all" class="delete">Delete</button>
                 `)
                 let canvas = document.getElementById("myCanvas")
                     let ctx = canvas.getContext("2d")
@@ -158,6 +158,27 @@ function canvasLayouts(layoutValue){
 
 }
 
+function wrappingPaperImage(){
+    const generatePic = document.getElementById("next")
+    generatePic.addEventListener('submit', function(event){
+        event.preventDefault()
+        if(event.target.tagName === "BUTTON")
+        // console.log(imageField.name)
+        const imageField = document.getElementById("images-main")
+        console.log(event.target.previousElementSibling.value)
+        console.log(event.target.previousSibling.innerHTML)
+        console.log("hello world")
+        console.log(imageField.value)
+              
+        //this works!!!!!!!!!!!!!!!!!
+        // let div = document.getElementById("canvas")
+        //         while(div.firstChild){
+        //         div.removeChild(div.firstChild)
+        //         }
+    })
+}
+
+
 function formlistner(){
     const form = document.getElementById("form")
     form.addEventListener("click", function(event){
@@ -175,15 +196,27 @@ function formlistner(){
                 const formOne = (`
                 <form id="form-div">
                         <lable>wrapping paper text</lable>
+                        <br/>
                         <input type="text" id="wrapping-inner-text">
+                        <br/>
                         <label for="images-main">Image</label>
+                        <br/>
                         <select name="images-main" id="images-main">
+                            <option value="">Select Image</option>
+                            <option value="https://ibb.co/k9NWkdq">Birthday Cake</option>
+                            <option value="https://ibb.co/qj21Ym9">Snowflakes</option>
+                            <option value="https://ibb.co/HdGmTYz">Hearts</option>
+                            <option value="https://ibb.co/9ZFm7Fp">Clovers</option>
+                            <option value="https://ibb.co/b2vwnFK">Flowers</option>
                         </select>
-                    </form>
+                        <br/>
+                        <button id="btn-all" class="Generate">Generate</button>
+                        </form>
                     `)
                 formDiv.innerHTML = formOne
-                renderDropdown()
+                // renderDropdown()
                 canvasLayouts(layoutValue)
+                wrappingPaperImage()
             }else if(formData.value === "2"){
 
                 let div = document.getElementById("index-container")
@@ -194,16 +227,20 @@ function formlistner(){
                 const formTwo =(`
                     <form id="form-div">
                     <label for="images-main">Image</label>
+                    <br/>
                     <select name="images-main" id="images-main">
+                        <option value="">Select Image</option>
                     </select>
-
+                    <br/>
                     <label for="images-main">Image</label>
+                    <br/>
                     <select name="images-main" id="images-secondary">
+                        <option value="">Select Image</option>
                     </select>
                     </form>
                 `)
                 formDiv.innerHTML = formTwo
-                renderDropdownSecondary()
+                // renderDropdownSecondary()
                 canvasLayouts(layoutValue)
             }else if(formData.value === "3"){
 
@@ -215,19 +252,24 @@ function formlistner(){
                 const formThree = (`
                 <form id="form-div">
                         <lable>wrapping paper text</lable>
+                        <br/>
                         <input type="text">
+                        <br/>
                         <label for="images-main">Image</label>
+                        <br/>
                             <select name="images-main" id="images-main">
-                            
-                        </select>
-
+                            <option value="">Select Image</option>
+                            </select>
+                        <br/>
                         <label for="image">Image</label>
+                        <br/>
                             <select name="image" id="images-secondary">
-                        </select>
+                            <option value="">Select Image</option>
+                            </select>
                     </form>
                     `)
                     formDiv.innerHTML = formThree
-                    renderDropdownSecondary()
+                    // renderDropdownSecondary()
                     canvasLayouts(layoutValue)
             }else if(formData.value === "4"){
 
@@ -239,111 +281,116 @@ function formlistner(){
                 const formFour = (`
                 <form id="form-div">
                         <label for="images-main">Image</label>
+                        <br/>
                             <select name="images-main" id="images-main">
-                            
-                        </select>
-
+                            <option value="">Select Image</option>
+                             </select>
+                             <br/>
                         <label for="image">Image</label>
+                        <br/>
                             <select name="image" id="images-secondary">
+                            <option value="">Select Image</option>
                             </select>
-
+                            <br/>
                         <label for="image">Image</label>
+                        <br/>
                             <select name="image" id="images-tertiary">
+                            <option value="">Select Image</option>
                             </select>
                     </form>
                     `)
                     formDiv.innerHTML = formFour
-                    renderDropdownTertiary()
+                    // renderDropdownTertiary()
                     canvasLayouts(layoutValue)
             }   
         }
     })
 }
 
-function renderDropdownTertiary(){
-    let dropdown = document.getElementById('images-main')
-    let dropdownSecondary = document.getElementById('images-secondary')
-    let dropdownTertiary = document.getElementById('images-tertiary')
+// function renderDropdownTertiary(){
+//     let dropdown = document.getElementById('images-main')
+//     let dropdownSecondary = document.getElementById('images-secondary')
+//     let dropdownTertiary = document.getElementById('images-tertiary')
 
-    let defaultOption = document.createElement('option')
-    let defaultOptionSecondary = document.createElement('option')
-    let defaultOptionTertiary = document.createElement('option')
+//     let defaultOption = document.createElement('option')
+//     let defaultOptionSecondary = document.createElement('option')
+//     let defaultOptionTertiary = document.createElement('option')
 
-    defaultOption.text = "Select Image"
-    defaultOptionSecondary.text = "Select Image"
-    defaultOptionTertiary.text = "Select Image"
+//     defaultOption.text = "Select Image"
+//     defaultOptionSecondary.text = "Select Image"
+//     defaultOptionTertiary.text = "Select Image"
 
-    dropdown.add(defaultOption)
-    dropdownSecondary.add(defaultOptionSecondary)
-    dropdownTertiary.add(defaultOptionTertiary)
+//     dropdown.add(defaultOption)
+//     dropdownSecondary.add(defaultOptionSecondary)
+//     dropdownTertiary.add(defaultOptionTertiary)
 
-    fetch("http://localhost:3000/images")
-    .then(resp=> resp.json())
-    .then(images=> { 
-        for(let i = 0; i < images.length; i++){
-            let option = document.createElement('option')
-            option.innerHTML = images[i].name
-            option.value = images[i].img_url
-            dropdown.options.add(option)
+//     fetch("http://localhost:3000/images")
+//     .then(resp=> resp.json())
+//     .then(images=> { 
+//         for(let i = 0; i < images.length; i++){
+//             let option = document.createElement('option')
+//             option.innerHTML = images[i].name
+//             option.value = images[i].img_url
+//             dropdown.options.add(option)
             
-            let optionSecondary = document.createElement('option')
-            optionSecondary.innerHTML = images[i].name
-            optionSecondary.value = images[i].img_url
-            dropdownSecondary.options.add(optionSecondary)
+//             let optionSecondary = document.createElement('option')
+//             optionSecondary.innerHTML = images[i].name
+//             optionSecondary.value = images[i].img_url
+//             dropdownSecondary.options.add(optionSecondary)
 
-            let optionTertiary = document.createElement('option')
-            optionTertiary.innerHTML = images[i].name
-            optionTertiary.value = images[i].img_url
-            dropdownTertiary.options.add(optionTertiary)
-        }
-    }) 
-}
+//             let optionTertiary = document.createElement('option')
+//             optionTertiary.innerHTML = images[i].name
+//             optionTertiary.value = images[i].img_url
+//             dropdownTertiary.options.add(optionTertiary)
+//         }
+//     }) 
+// }
 
-function renderDropdownSecondary(){
-    let dropdown = document.getElementById('images-main')
-    let dropdownSecondary = document.getElementById('images-secondary')
-    let defaultOption = document.createElement('option')
-    let defaultOptionSecondary = document.createElement('option')
-    defaultOption.text = "Select Image"
-    defaultOptionSecondary.text = "Select Image"
-    dropdown.add(defaultOption)
-    dropdownSecondary.add(defaultOptionSecondary)
+// function renderDropdownSecondary(){
+//     let dropdown = document.getElementById('images-main')
+//     let dropdownSecondary = document.getElementById('images-secondary')
+//     let defaultOption = document.createElement('option')
+//     let defaultOptionSecondary = document.createElement('option')
+//     defaultOption.text = "Select Image"
+//     defaultOptionSecondary.text = "Select Image"
+//     dropdown.add(defaultOption)
+//     dropdownSecondary.add(defaultOptionSecondary)
 
-    fetch("http://localhost:3000/images")
-    .then(resp=> resp.json())
-    .then(images=> { 
-        for(let i = 0; i < images.length; i++){
-            let option = document.createElement('option')
-            option.innerHTML = images[i].name
-            option.value = images[i].img_url
-            dropdown.options.add(option)
+//     fetch("http://localhost:3000/images")
+//     .then(resp=> resp.json())
+//     .then(images=> { 
+//         for(let i = 0; i < images.length; i++){
+//             let option = document.createElement('option')
+//             option.innerHTML = images[i].name
+//             option.value = images[i].img_url
+//             dropdown.options.add(option)
             
-            let optionSecondary = document.createElement('option')
-            optionSecondary.innerHTML = images[i].name
-            optionSecondary.value = images[i].img_url
-            dropdownSecondary.options.add(optionSecondary)
-        }
-    }) 
-}
+//             let optionSecondary = document.createElement('option')
+//             optionSecondary.innerHTML = images[i].name
+//             optionSecondary.value = images[i].img_url
+//             dropdownSecondary.options.add(optionSecondary)
+//         }
+//     }) 
+// }
 
-function renderDropdown(){
-    let dropdown = document.getElementById('images-main')
-    let defaultOption = document.createElement('option')
-    defaultOption.text = "Select Image"
-    dropdown.add(defaultOption)
+// function renderDropdown(){
+//     let dropdown = document.getElementById('images-main')
+//     let defaultOption = document.createElement('option')
+//     defaultOption.text = "Select Image"
+//     dropdown.add(defaultOption)
 
 
-    fetch("http://localhost:3000/images")
-    .then(resp=> resp.json())
-    .then(images=> { 
-        for(let i = 0; i < images.length; i++){
-            let option = document.createElement('option')
-            option.innerHTML = images[i].name
-            option.value = images[i].img_url
-            dropdown.options.add(option)
-        }
-    }) 
-}
+//     fetch("http://localhost:3000/images")
+//     .then(resp=> resp.json())
+//     .then(images=> { 
+//         for(let i = 0; i < images.length; i++){
+//             let option = document.createElement('option')
+//             option.innerHTML = images[i].name
+//             option.value = images[i].img_url
+//             dropdown.options.add(option)
+//         }
+//     }) 
+// }
 
 
 // function fetchReqestsUser(){
