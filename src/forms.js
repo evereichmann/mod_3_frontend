@@ -1,18 +1,31 @@
 const formDiv = document.getElementById("next")
-const textInput = document.getElementById("textId")
+const currentUser = {id: 1, username: "evereichmann" , password: "1234Flatiron"}
+
 
 function main(){
     formlistner()
     // fetchReqestsImage()
-    // fetchReqestsWrappingPaper()
+    fetchReqestsWrappingPaper()
     // fetchReqestsUser()
    // displayText();
 }
 
+function fetchReqestsWrappingPaper(){
+    const wrappingPaperDiv = document.getElementById('wrapping-paper-card')
+    fetch("http://localhost:3000/wrapping_papers")
+        .then(resp=> resp.json())
+        .then(wrappingPaperData=> {
+            wrappingPaperData.forEach(paper=> {
+                        const editWrapingPaper = (function(){ return paper.user_id === currentUser.id } ) ? 'view' : 'edit'
+                        wrappingPaperDiv.innerHTML += (`<p>${paper.name}</p><button data-id=${paper.user_id}>${editWrapingPaper}</button>`)
+            })
+        })
+}
+
+
+
 function canvasLayouts(layoutValue){
     if (layoutValue === "1"){
-        
-
         const canvasContainer = document.getElementById("canvas")
                 canvasContainer.innerHTML = (`
                     <canvas id="myCanvas" width="600" height="800" style="border:1px solid #c3c3c3;">
@@ -32,8 +45,15 @@ function canvasLayouts(layoutValue){
                     ctx.fillRect(400,400,200,200)
                     ctx.fillRect(200,200,200,200)
                     ctx.fillRect(200,600,200,200)
-                console.log('1')
-                
+
+                    let ct = canvas.getContext("2d")
+                    ct.fillStyle = "white"
+                    ct.fillRect(0,200,200,200)
+                    ct.fillRect(0,600,200,200)
+                    ct.fillRect(200,0,200,200)
+                    ct.fillRect(200,400,200,200)
+                    ct.fillRect(400,200,200,200)
+                    ct.fillRect(400,600,200,200)
                 
     }else if (layoutValue === "2"){
 
@@ -56,6 +76,15 @@ function canvasLayouts(layoutValue){
                     ctx.fillRect(400,400,200,200)
                     ctx.fillRect(200,200,200,200)
                     ctx.fillRect(200,600,200,200)
+
+                    var ct = canvas.getContext("2d")
+                    ct.fillStyle = "white"
+                    ct.fillRect(0,200,200,200)
+                    ct.fillRect(0,600,200,200)
+                    ct.fillRect(200,0,200,200)
+                    ct.fillRect(200,400,200,200)
+                    ct.fillRect(400,200,200,200)
+                    ct.fillRect(400,600,200,200)
                 console.log('2')
                 
     }else if (layoutValue === "3"){
@@ -140,6 +169,12 @@ function formlistner(){
             const formData = document.getElementById("layouts")
             let layoutValue = formData.value
             if(formData.value === "1"){
+
+                let div = document.getElementById("index-container")
+                while(div.firstChild){
+                div.removeChild(div.firstChild)
+                }
+
                 const formOne = (`
                 <form id="form-div">
                         <lable>wrapping paper text</lable>
@@ -153,6 +188,12 @@ function formlistner(){
                 renderDropdown()
                 canvasLayouts(layoutValue)
             }else if(formData.value === "2"){
+
+                let div = document.getElementById("index-container")
+                while(div.firstChild){
+                div.removeChild(div.firstChild)
+                }
+
                 const formTwo =(`
                     <form id="form-div">
                     <label for="images-main">Image</label>
@@ -168,6 +209,12 @@ function formlistner(){
                 renderDropdownSecondary()
                 canvasLayouts(layoutValue)
             }else if(formData.value === "3"){
+
+                let div = document.getElementById("index-container")
+                while(div.firstChild){
+                div.removeChild(div.firstChild)
+                }
+
                 const formThree = (`
                 <form id="form-div">
                         <lable>wrapping paper text</lable>
@@ -186,6 +233,12 @@ function formlistner(){
                     renderDropdownSecondary()
                     canvasLayouts(layoutValue)
             }else if(formData.value === "4"){
+
+                let div = document.getElementById("index-container")
+                while(div.firstChild){
+                div.removeChild(div.firstChild)
+                }
+
                 const formFour = (`
                 <form id="form-div">
                         <label for="images-main">Image</label>
@@ -342,15 +395,7 @@ window.document.addEventListener('DOMContentLoaded', function(e) {
 //         })
 //     }
 
-// function fetchReqestsWrappingPaper(){
-//     fetch("http://localhost:3000/wrapping_papers")
-//         .then(resp=> resp.json())
-//         .then(wrappingPaperData=> {
-//             wrappingPaperData.forEach(paper=> {
-//                 //console.log(paper)
-//             })
-//         })
-// }
+
 // function fetchReqestsImage(){
 //     fetch("http://localhost:3000/images")
 //             .then(resp=> resp.json())
